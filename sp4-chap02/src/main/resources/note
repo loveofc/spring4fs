@@ -1,0 +1,28 @@
+//스프링 = 객체 컨테이너?//
+스프링의 핵심 기능은 객체를 생성하고 초기화하는 것이다.
+이와 관련된 기능은 ApplicationContext라는 인터페이스에 정의되어 있으며, 
+GenericXmlApplicationContext 클래스는 이 인터페이스를 알맞게 구현한 클래스 중 하나이다.
+
+*GenericXmlApplicationContext : XML로부터 객체 설정 정보를 가져온다.
+*AnnotationConfigApplicationContext : 자바 애노테이션을 이용한 클래스로부터 객체 설정 정보를 가져온다
+*GenericGroovyApplicationContext :그루비 코드를 이용해 설정 정보를 가져온다.
+
+어떤 구현 클래스를 사용하든, 구현 클래스는 설정 정보로부터 빈이라고 불리는 객체를 생성하고 그 객체를 내부에 보관한다. 그리고 getBean()메서드를 실행하면
+해당하는 빈 객체를 제공한다. 
+
+GenericXmlApplicationContext ex = new GenericXmlApplicationContext("classpath:ex.xml"); -resources폴더 안
+Somting s = ex.getBean("ex1",ex.class);
+
+ApplicationContext(or BeanFactory)는 빈 객체의 생성, 초기화, 보관, 제거 등을 담당, 컨테이너라고도 부름, 스프링 컨테이너라교 표현
+
+[스프링 컨테이너 일부 계층]
+(interface)BeanFactory < (interface)LisableBeanFactory < (interface)ApplicationContext < (interface)ConfigurableApplicationContext
+< AbstactApplicationContext < GenericApplicationContext < [ GenericXmlApplicationContext, AnnotationConfigApplicationContext, GenericGroovyApplicationContext ]
+
+
+//싱글톤 객체//
+
+Somting s1 = ex.getBean("ex1",ex.class);
+Somting s2 = ex.getBean("ex1",ex.class);
+s1 == s2 ->t
+
